@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Ridgeline Strategy Group unites Campus Insight, Pennock Systems, and 5-Star Media to deliver strategic, technological, and creative excellence." />
+  <title>Ridgeline Strategy Group</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/img/dba-icons/RSG-logoBLACK.PNG" />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Custom CSS + JS -->
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <script defer src="assets/js/main.js"></script>
+  <script defer src="assets/js/agent.js"></script>
+</head>
+
+<body class="bg-slate-900 text-gray-100 font-inter min-h-screen flex flex-col">
+
+  <!-- === Background Video (behind everything) === -->
+  <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+    <video
+      id="bg-video"
+      class="min-w-full min-h-full w-auto h-auto object-cover"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      poster="assets/img/bg-ridgeline.jpg"
+    >
+      <!-- ⬇️ Replace the src with your Cloudinary video URL -->
+      <source src="https://res.cloudinary.com/dq7ca3cts/video/upload/v1744223878/2110771-uhd_3840_2160_30fps_baepuc.mp4" type="video/mp4" />
+    </video>
+    <!-- Dim overlay -->
+    <div class="absolute inset-0 bg-slate-900/60"></div>
+  </div>
+  <!-- ============================================ -->
+
+  <!-- Header -->
+  <header class="flex items-center justify-between px-8 py-6 border-b border-slate-800 backdrop-blur-sm bg-slate-900/10">
+    <!-- Left side: logo + name -->
+    <div class="flex items-center space-x-3">
+      <img src="assets/img/dba-icons/RSG-logoWHITE.png" alt="Ridgeline Strategy Group Logo" class="h-10 w-auto">
+      <span class="text-2xl font-exo2 tracking-wider">RIDGELINE STRATEGY GROUP</span>
+    </div>
+
+    <!-- Right side: navigation links -->
+    <nav class="hidden md:flex space-x-8 text-sm font-medium">
+      <a href="index.html" class="text-white border-b border-teal-400 pb-1">Home</a>
+      <a href="about.html" class="text-gray-300 hover:text-white transition">About</a>
+      <a href="contact.html" class="text-gray-300 hover:text-white transition">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex flex-col items-center justify-center flex-grow text-center space-y-10 px-6">
+    <h2 class="text-4xl md:text-5xl font-exo2 text-white">Where can we help you make your next move?</h2>
+    <p class="text-gray-200/90 max-w-xl">
+      Ridgeline unites strategy, technology, and media expertise to move organizations forward.
+      Choose your focus area below — or ask our AI assistant for help.
+    </p>
+
+    <!-- Selection Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8 w-full max-w-6xl">
+
+      <!-- Campus Insight -->
+      <div class="fade-in group bg-slate-800/80 backdrop-blur-md rounded-2xl p-8 hover:bg-blue-900 cursor-pointer transition"
+           onclick="navigateTo('campus-insight')">
+        <img src="assets/img/dba-icons/campus-insight.svg" alt="Campus Insight"
+             class="h-12 mx-auto mb-4 opacity-80 group-hover:opacity-100">
+        <h3 class="text-xl font-semibold mb-2">Campus Insight</h3>
+        <p class="text-gray-300 text-sm">
+          Partnering with colleges to enhance operational excellence and student success.
+        </p>
+      </div>
+
+      <!-- Pennock Systems -->
+      <div class="fade-in-delay-1 group bg-slate-800/80 backdrop-blur-md rounded-2xl p-8 hover:bg-teal-800 cursor-pointer transition"
+           onclick="navigateTo('pennock-systems')">
+        <img src="assets/img/dba-icons/logo-pennock.png" alt="Pennock Systems Logo"
+             class="h-12 mx-auto mb-4 opacity-90 group-hover:opacity-100">
+        <h3 class="text-xl font-semibold mb-2">Pennock Systems</h3>
+        <p class="text-gray-300 text-sm">
+          Building custom technology and AI agentic solutions for small businesses.
+        </p>
+      </div>
+
+      <!-- 5-Star Media -->
+      <div class="fade-in-delay-2 group bg-slate-800/80 backdrop-blur-md rounded-2xl p-8 hover:bg-amber-800 cursor-pointer transition"
+           onclick="navigateTo('five-star-media')">
+        <img src="assets/img/dba-icons/five-star-media.svg" alt="5-Star Media"
+             class="h-12 mx-auto mb-4 opacity-80 group-hover:opacity-100">
+        <h3 class="text-xl font-semibold mb-2">5-Star Media</h3>
+        <p class="text-gray-300 text-sm">
+          Elevating college and athletic branding through elite visuals and design.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- AI Agent  -->
+  <div id="agent-container" class="fixed bottom-6 right-6 z-50">
+    <!-- Toggle Button -->
+    <button id="agent-toggle" class="bg-sky-500 hover:bg-sky-400 text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center text-2xl font-bold transition-all duration-300">
+      💬
+    </button>
+
+    <!-- Chat Panel -->
+    <div id="agent-panel"
+         class="hidden absolute bottom-20 right-0 w-80 md:w-96 bg-slate-800/70 backdrop-blur-lg border border-slate-700 rounded-3xl shadow-2xl overflow-hidden transform origin-bottom-right">
+      <div class="flex items-center justify-between p-4 bg-sky-500/20 border-b border-slate-700">
+        <span class="font-exo2 text-lg text-white">Stratus - AI Assistant</span>
+        <button id="agent-close" class="text-gray-400 hover:text-white transition text-xl">&times;</button>
+      </div>
+
+      <div class="p-4 h-80 overflow-y-auto text-left text-gray-200 text-sm space-y-3" id="agent-messages">
+        <!-- Intro messages -->
+        <p class="text-gray-400 italic">
+          👋 Hi there! I’m <span class="text-sky-300">Stratus</span>, your digital assistant. How can I help today?
+        </p>
+        <p class="text-gray-400 italic">
+          💡 Feel free to ask me to do a deep-dive on any of our three professional services.
+          I can also help you <span class="text-sky-300">book a time to meet with an RSG advisor</span>,
+          or answer any other questions you might have.
+        </p>
+
+        <!-- Suggested questions -->
+        <div class="pt-2">
+          <p class="text-gray-400 text-xs uppercase tracking-wide mb-2">Suggested questions:</p>
+          <div class="flex flex-wrap gap-2">
+            <button class="suggestion bg-slate-700/60 hover:bg-sky-500/20 border border-sky-400 text-sky-300 text-xs px-3 py-1.5 rounded-full transition">
+              Tell me about Pennock Systems
+            </button>
+            <button class="suggestion bg-slate-700/60 hover:bg-sky-500/20 border border-sky-400 text-sky-300 text-xs px-3 py-1.5 rounded-full transition">
+              Tell me about Campus Insight
+            </button>
+            <button class="suggestion bg-slate-700/60 hover:bg-sky-500/20 border border-sky-400 text-sky-300 text-xs px-3 py-1.5 rounded-full transition">
+              Tell me about 5-Star Media
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-4 bg-slate-900/70 border-t border-slate-700 flex space-x-2">
+        <input type="text" id="agent-input" placeholder="Type a message..."
+               class="flex-grow bg-slate-800 text-gray-100 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-sky-400" />
+        <button class="bg-sky-500 hover:bg-sky-400 text-white px-4 py-2 rounded-lg text-sm font-medium">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="text-center py-6 text-gray-500 text-sm">
+    © 2025 Ridgeline Strategy Group · All rights reserved.
+  </footer>
+
+  <script>
+    function navigateTo(service) {
+      let url = "";
+      switch (service) {
+        case "campus-insight":
+          url = "https://campusinsight.com";
+          break;
+        case "pennock-systems":
+          url = "https://pennock.systems";
+          break;
+        case "five-star-media":
+          url = "https://5starmedia.ai";
+          break;
+      }
+      if (url) window.open(url, "_blank");
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+/* assets/css/styles.css */
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: radial-gradient(circle at 30% 30%, #1e293b, #0f172a);
+  background-attachment: fixed;
+}
+
+.font-exo2 {
+  font-family: 'Exo 2', sans-serif;
+}
+
+/* About Page Animation */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+.fade-in-delay-1 {
+  opacity: 0;
+  animation: fadeInUp 1.2s ease-out forwards;
+  animation-delay: 0.2s;
+}
+
+.fade-in-delay-2 {
+  opacity: 0;
+  animation: fadeInUp 1.4s ease-out forwards;
+  animation-delay: 0.4s;
+}
+
+/* Agent Styling */
+/* === Agent Chat UI Styling === */
+
+/* Slide-in Animation (diagonal right-to-left) */
+@keyframes slideInDiagonal {
+  0% {
+    opacity: 0;
+    transform: translate(100%, 100%) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+/* Fade-out for closing */
+@keyframes slideOutDiagonal {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(100%, 100%) scale(0.8);
+  }
+}
+
+/* Visible State (with animation) */
+#agent-panel.open {
+  display: block;
+  animation: slideInDiagonal 0.8s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+/* Closing transition */
+#agent-panel.closing {
+  animation: slideOutDiagonal 0.5s ease forwards;
+}
+
+/* Scrollbar cleanup */
+#agent-messages::-webkit-scrollbar {
+  width: 6px;
+}
+#agent-messages::-webkit-scrollbar-thumb {
+  background: rgba(125, 211, 252, 0.5);
+  border-radius: 3px;
+}
